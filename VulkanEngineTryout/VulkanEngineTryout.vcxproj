@@ -153,6 +153,7 @@
     <ClCompile Include="FirstApp.cpp" />
     <ClCompile Include="LveGameObject.cpp" />
     <ClCompile Include="LveModel.cpp" />
+    <ClCompile Include="LveRenderer.cpp" />
     <ClCompile Include="LveWindow.cpp" />
     <ClCompile Include="Lve_Swap_Chain.cpp" />
     <ClCompile Include="main.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="FirstApp.h" />
     <ClInclude Include="LveGameObject.h" />
     <ClInclude Include="LveModel.h" />
+    <ClInclude Include="LveRenderer.h" />
     <ClInclude Include="LveWindow.h" />
     <ClInclude Include="Lve_Swap_Chain.h" />
     <ClInclude Include="Pipeline.h" />
