@@ -158,6 +158,7 @@
     <ClCompile Include="Lve_Swap_Chain.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pipeline.cpp" />
+    <ClCompile Include="SimpleRenderSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LveDevice.h" />
@@ -168,6 +169,7 @@
     <ClInclude Include="LveWindow.h" />
     <ClInclude Include="Lve_Swap_Chain.h" />
     <ClInclude Include="Pipeline.h" />
+    <ClInclude Include="SimpleRenderSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

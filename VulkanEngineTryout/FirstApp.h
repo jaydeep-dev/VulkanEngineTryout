@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Pipeline.h"
 #include "LveWindow.h"
 #include "LveDevice.h"
 #include "LveGameObject.h"
@@ -8,6 +7,7 @@
 
 // Std
 #include <memory>
+#include <vector>
 
 namespace lve {
 	class FirstApp
@@ -27,16 +27,11 @@ namespace lve {
 	private:
 		void sierpinski(std::vector<LveModel::Vertex>& vertices, int depth, glm::vec2 left, glm::vec2 right, glm::vec2 top);
 		void loadGameObjects();
-		void createPipelineLayout();
-		void createPipeline();
-		void renderGameobjects(VkCommandBuffer commandBuffer);
 
 		LveWindow lveWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };
 		LveDevice lveDevice{ lveWindow };
 		LveRenderer lveRenderer{ lveWindow, lveDevice };
 
-		std::unique_ptr<Pipeline> pipeline;
-		VkPipelineLayout pipelineLayout;
 		std::vector<LveGameObject> lveGameObjects;
 	};
 }
