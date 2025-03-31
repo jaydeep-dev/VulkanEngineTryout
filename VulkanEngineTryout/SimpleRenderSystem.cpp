@@ -15,8 +15,7 @@
 namespace lve {
 
 	struct SimplePushConstantData {
-		glm::mat2 transform{ 1.0f };
-		glm::vec2 offset;
+		glm::mat4 transform{ 1.0f };
 		alignas(16) glm::vec3 color;
 	};
 
@@ -30,27 +29,6 @@ namespace lve {
 	{
 		vkDestroyPipelineLayout(lveDevice.device(), pipelineLayout, nullptr);
 	}
-
-	void SimpleRenderSystem::sierpinski(
-		std::vector<LveModel::Vertex>& vertices,
-		int depth,
-		glm::vec2 left,
-		glm::vec2 right,
-		glm::vec2 top) {
-		if (depth <= 0) {
-			vertices.push_back({ {top}, {1.0f,.37f,.22f} });
-			vertices.push_back({ {right}, {0.15f, 0.5f, 0.85f} });
-			vertices.push_back({ {left}, { .42f, .6f, .1f } });
-		}
-		else {
-			auto leftTop = 0.5f * (left + top);
-			auto rightTop = 0.5f * (right + top);
-			auto leftRight = 0.5f * (left + right);
-			sierpinski(vertices, depth - 1, left, leftRight, leftTop);
-			sierpinski(vertices, depth - 1, leftRight, right, rightTop);
-			sierpinski(vertices, depth - 1, leftTop, rightTop, top);
-		}
-	}	
 
 	void SimpleRenderSystem::createPipelineLayout()
 	{
@@ -85,24 +63,20 @@ namespace lve {
 		pipeline = std::make_unique<Pipeline>(lveDevice, "./Shaders/simple_shader.vert.spv", "./Shaders/simple_shader.frag.spv", pipelineConfig);
 	}
 
-	void SimpleRenderSystem::renderGameobjects(VkCommandBuffer commandBuffer, std::vector<LveGameObject>& lveGameObjects)
+	void SimpleRenderSystem::renderGameobjects(VkCommandBuffer commandBuffer, std::vector<LveGameObject>& lveGameObjects, const LveCamera& camera)
 	{
 		pipeline->bind(commandBuffer);
 
 		for (auto& obj : lveGameObjects)
 		{
-			SimplePushConstantData push{};
-			push.offset = obj.transform2D.translation;
-			push.color = obj.color;
-			push.transform = obj.transform2D.mat2();
+			obj.transform.rotation.x = glm::mod(obj.transform.rotation.y + 0.005f, glm::two_pi<float>());
+			obj.transform.rotation.y = glm::mod(obj.transform.rotation.y + 0.01f, glm::two_pi<float>());
 
-			vkCmdPushConstants(
-				commandBuffer,
-				pipelineLayout,
-				VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
-				0,
-				sizeof(SimplePushConstantData),
-				&push);
+			SimplePushConstantData push{};
+			push.color = obj.color;
+			push.transform = camera.getProjection() * obj.transform.mat4();
+
+			vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
 
 			obj.model->bind(commandBuffer);
 			obj.model->draw(commandBuffer);

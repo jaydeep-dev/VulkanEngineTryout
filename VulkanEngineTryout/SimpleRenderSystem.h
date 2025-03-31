@@ -3,6 +3,7 @@
 #include "Pipeline.h"
 #include "LveDevice.h"
 #include "LveGameObject.h"
+#include "LveCamera.h"
 
 // Std
 #include <memory>
@@ -18,10 +19,9 @@ namespace lve {
 		SimpleRenderSystem(const SimpleRenderSystem&) = delete;
 		SimpleRenderSystem& operator=(const SimpleRenderSystem&) = delete;
 
-		void renderGameobjects(VkCommandBuffer commandBuffer, std::vector<LveGameObject>& gameObjects);
+		void renderGameobjects(VkCommandBuffer commandBuffer, std::vector<LveGameObject>& gameObjects, const LveCamera& camera);
 
 	private:
-		void sierpinski(std::vector<LveModel::Vertex>& vertices, int depth, glm::vec2 left, glm::vec2 right, glm::vec2 top);
 		void createPipelineLayout();
 		void createPipeline(VkRenderPass renderPass);
 

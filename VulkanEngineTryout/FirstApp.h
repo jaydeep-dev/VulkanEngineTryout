@@ -25,7 +25,6 @@ namespace lve {
 		void run();
 
 	private:
-		void sierpinski(std::vector<LveModel::Vertex>& vertices, int depth, glm::vec2 left, glm::vec2 right, glm::vec2 top);
 		void loadGameObjects();
 
 		LveWindow lveWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };

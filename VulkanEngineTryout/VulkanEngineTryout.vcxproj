@@ -149,6 +149,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LveCamera.cpp" />
     <ClCompile Include="LveDevice.cpp" />
     <ClCompile Include="FirstApp.cpp" />
     <ClCompile Include="LveGameObject.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="SimpleRenderSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LveCamera.h" />
     <ClInclude Include="LveDevice.h" />
     <ClInclude Include="FirstApp.h" />
     <ClInclude Include="LveGameObject.h" />
