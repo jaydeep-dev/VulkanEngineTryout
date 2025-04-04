@@ -1,6 +1,7 @@
 #include "FirstApp.h"
 #include "SimpleRenderSystem.h"
 #include "LveCamera.h"
+#include "Keyboard_Movement_Input.h"
 
 // GLM
 #define GLM_FORCE_RADIANS
@@ -11,6 +12,7 @@
 // std
 #include <iostream>
 #include <array>
+#include <chrono>
 #include <cassert>
 #include <stdexcept>
 
@@ -32,15 +34,27 @@ namespace lve {
 		SimpleRenderSystem simpleRenderSystem{ lveDevice, lveRenderer.getSwapChainRenderPass() };
 		LveCamera camera{};
 
+		auto viewerObject = LveGameObject::createGameObject();
+		Keyboard_Movement_Input cameraController{};
+
 		while (!lveWindow.shouldClose())
 		{
 			glfwPollEvents();
 			float aspect = lveRenderer.getAspectRatio();
-			camera.setOrthographicProjection(-aspect, aspect, -1, 1, -1, 10);
-			//camera.setPerspectiveProjection(glm::radians(60.0f), aspect, 0.1f, 10.0f);
+			//camera.setOrthographicProjection(-aspect, aspect, -1, 1, -1, 10);
+			camera.setPerspectiveProjection(glm::radians(60.0f), aspect, 0.1f, 10.0f);
+
+			auto currentTime = std::chrono::high_resolution_clock::now();
 
 			if (auto commandBuffer = lveRenderer.beginFrame())
 			{
+				auto newTime = std::chrono::high_resolution_clock::now();
+				auto frameTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
+				currentTime = newTime;
+
+				cameraController.moveInPlaneXZ(lveWindow.getGLFWwindow(), viewerObject, frameTime);
+				camera.setViewYXZ(viewerObject.transform.translation, viewerObject.transform.rotation);
+
 				lveRenderer.beginSwapChainRenderPass(commandBuffer);
 				simpleRenderSystem.renderGameobjects(commandBuffer, lveGameObjects, camera);
 				lveRenderer.endSwapChainRenderPass(commandBuffer);

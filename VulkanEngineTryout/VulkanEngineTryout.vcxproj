@@ -149,6 +149,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Keyboard_Movement_Input.cpp" />
     <ClCompile Include="LveCamera.cpp" />
     <ClCompile Include="LveDevice.cpp" />
     <ClCompile Include="FirstApp.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="SimpleRenderSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Keyboard_Movement_Input.h" />
     <ClInclude Include="LveCamera.h" />
     <ClInclude Include="LveDevice.h" />
     <ClInclude Include="FirstApp.h" />

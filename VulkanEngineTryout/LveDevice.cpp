@@ -123,7 +123,13 @@ namespace lve {
         for (const auto& device : devices) {
             vkGetPhysicalDeviceProperties(device, &properties);
             std::cout << "Available device: " << properties.deviceName << std::endl;
+        }
+        
+        for (const auto& device : devices) {
+            vkGetPhysicalDeviceProperties(device, &properties);
             if (isDeviceSuitable(device)) {
+				physicalDevice = device;
+				//break;
                 if (properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
                     physicalDevice = device;
                     break;
