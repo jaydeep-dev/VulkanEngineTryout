@@ -137,5 +137,13 @@ namespace lve {
 		flatVase.transform.translation = { 0.25f, 0.f, 2.5f };
 		flatVase.transform.scale = { 1.0f, 1.0f, 1.0f };
 		lveGameObjects.push_back(std::move(flatVase));
+		
+		lveModel = LveModel::createModelFromFile(lveDevice, "VulkanModels/katana.obj");
+		auto katana = LveGameObject::createGameObject();
+		katana.model = lveModel;
+		katana.transform.translation = { 0.f, 0.f, 2.5f };
+		katana.transform.rotation = { 80.f, 0.f, 0.f };
+		katana.transform.scale = { 1.0f, 1.0f, 1.0f };
+		lveGameObjects.push_back(std::move(katana));
 	}
 }
