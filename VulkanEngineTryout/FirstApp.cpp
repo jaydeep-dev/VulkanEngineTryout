@@ -73,7 +73,8 @@ namespace lve {
 		LveCamera camera{};
 
 		auto viewerObject = LveGameObject::createGameObject();
-		Keyboard_Movement_Input cameraController{};
+		//Keyboard_Movement_Input cameraController{};
+		Keyboard_Movement_Input_Alt cameraController{};
 
 		while (!lveWindow.shouldClose())
 		{
@@ -138,6 +139,8 @@ namespace lve {
 		flatVase.transform.scale = { 1.0f, 1.0f, 1.0f };
 		lveGameObjects.push_back(std::move(flatVase));
 		
+		// Katana Model [Sketchfab]: https://skfb.ly/oBNUD
+		/// "Katana" (https://skfb.ly/oBNUD) by DanixsDesigner is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 		lveModel = LveModel::createModelFromFile(lveDevice, "VulkanModels/katana.obj");
 		auto katana = LveGameObject::createGameObject();
 		katana.model = lveModel;
