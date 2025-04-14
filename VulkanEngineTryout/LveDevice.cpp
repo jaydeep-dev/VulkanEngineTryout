@@ -129,7 +129,7 @@ namespace lve {
             vkGetPhysicalDeviceProperties(device, &properties);
             if (isDeviceSuitable(device)) {
 				physicalDevice = device;
-				break; // comment this line to select discrete GPU
+				//break; // comment this line to select discrete GPU
                 if (properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
                     physicalDevice = device;
                     break;

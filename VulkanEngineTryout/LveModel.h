@@ -1,6 +1,7 @@
 #pragma once
 
 #include "LveDevice.h"
+#include "Lve_Buffer.h"
 
 // std
 #include <memory>
@@ -54,13 +55,11 @@ namespace lve {
 
 		LveDevice& lveDevice;
 		
-		VkBuffer vertexBuffer;
-		VkDeviceMemory vertexBufferMemory;
+		std::unique_ptr<Lve_Buffer> vertexBuffer;
 		uint32_t vertexCount;
 		
 		bool hasIndexBuffer = false;
-		VkBuffer indexBuffer;
-		VkDeviceMemory indexBufferMemory;
+		std::unique_ptr<Lve_Buffer> indexBuffer;
 		uint32_t indexCount;
 	};
 }
