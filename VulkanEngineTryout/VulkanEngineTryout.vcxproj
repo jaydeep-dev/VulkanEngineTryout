@@ -155,6 +155,7 @@
   <ItemGroup>
     <ClCompile Include="Keyboard_Movement_Input.cpp" />
     <ClCompile Include="LveCamera.cpp" />
+    <ClCompile Include="LveDescriptor.cpp" />
     <ClCompile Include="LveDevice.cpp" />
     <ClCompile Include="FirstApp.cpp" />
     <ClCompile Include="LveGameObject.cpp" />
@@ -172,6 +173,7 @@
   <ItemGroup>
     <ClInclude Include="Keyboard_Movement_Input.h" />
     <ClInclude Include="LveCamera.h" />
+    <ClInclude Include="LveDescriptor.h" />
     <ClInclude Include="LveDevice.h" />
     <ClInclude Include="FirstApp.h" />
     <ClInclude Include="LveGameObject.h" />
